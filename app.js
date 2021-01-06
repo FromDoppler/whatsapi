@@ -46,6 +46,8 @@ app.post('/recive', (req, res) => {
   res.end(twiml.toString());
 });
 
-app.listen(80, function () {
-  console.log('live port! 80' );
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, function () {
+  console.log('live port! 80' + PORT );
 });
