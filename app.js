@@ -39,7 +39,7 @@ app.get('/sendMessage', function (req, res) {
 
 app.post('/recive', (req, res) => {
   const twiml = new MessagingResponse();
-  const query =  JSON.parse(JSON.stringify(req.body));
+  const query =  JSON.parse(JSON.stringify(req.Body));
   console.log(query);
   console.log("otra opcioin seria estringifitear solo erl requ");
   console.log(JSON.parse(JSON.stringify(req)));
