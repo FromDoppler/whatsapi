@@ -33,7 +33,7 @@ app.post('/recive', (req, res) => {
   const query = req.body;
   console.log(req.body);
 
-  twiml.message("*¡Hola!* 👋\n\n *su mensaje es:* \n\n ${query.Body} \n\n  Gracias por escribirnos.\n\n Cuéntanos cómo podemos ayudarte y *un miembro del equipo de Doppler te responderá pronto.*\n");
+  twiml.message(`*¡Hola!* 👋\n\n *su mensaje es:* \n\n ${query.Body} \n\n  Gracias por escribirnos.\n\n *un miembro del equipo de Doppler te responderá pronto.*\n`);
   twiml.toString();
   twiml.message(`🌈  *visítanos!:* https://www.fromdoppler.com \n\n\n *muchas gracias.*`);
  
