@@ -7,15 +7,15 @@ var app = express();
   const client = require('twilio')(accountSid, authToken);
   const MessagingResponse = require('twilio').twiml.MessagingResponse;
   
-  console.log("#########################");
+/*   console.log("#########################");
   console.log(accountSid);
   console.log(authToken);
-  console.log("#########################");
+  console.log("#########################"); */
 
 app.get('/sendMessage', function (req, res) {
   client.messages
     .create({
-      from: 'whatsapp:+14155238886',
+      from: 'whatsapp:+16282271705',
       body: 'Bienvenido al wasap automatico de Doppler!',
       to: 'whatsapp:+5492236692734'
     })
