@@ -40,6 +40,7 @@ app.get('/sendMessage', function (req, res) {
 app.post('/recive', (req, res) => {
   const twiml = new MessagingResponse();
   const query = escape(req.Body);
+  console.log(req);
   twiml.message(`*su mensaje es:* \n\n${query}\n\n *muchas gracias.* \n\n\n🌈  *visítanos!:* https://www.fromdoppler.com`);
  
   res.writeHead(200, {'Content-Type': 'text/xml'});
