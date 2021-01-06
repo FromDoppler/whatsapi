@@ -1,6 +1,8 @@
 var express = require('express');
 require('dotenv').config();
+var bodyParser = require('body-parser');
 var app = express();
+app.use(bodyParser.urlencoded({extended: false}));
 const { escape } = require('querystring');
 
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -40,10 +42,8 @@ app.get('/sendMessage', function (req, res) {
 
 app.post('/recive', (req, res) => {
   const twiml = new MessagingResponse();
-  const query = escape(req.body);
-  const query2 = req;
-  console.log(query);
-  console.log(query2);
+  const query = req.body;
+  console.log(req.body);
 /*   
   console.log("otra opcioin seria estringifitear solo erl requ");
   console.log(JSON.parse(JSON.stringify(req))); */
