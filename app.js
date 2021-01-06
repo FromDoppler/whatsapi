@@ -12,6 +12,13 @@ var app = express();
   console.log(authToken);
   console.log("#########################"); */
 
+
+  app.get('/', function (req, res) {
+    console.log('Hello World!')
+    res.send('Hello World!');
+  });
+
+
 app.get('/sendMessage', function (req, res) {
   client.messages
     .create({
@@ -39,6 +46,6 @@ app.post('/recive', (req, res) => {
   res.end(twiml.toString());
 });
 
-app.listen(3000, function () {
-  console.log('live port 3000!');
+app.listen(80, function () {
+  console.log('live port! 80' );
 });
