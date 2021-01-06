@@ -40,8 +40,8 @@ app.get('/sendMessage', function (req, res) {
 
 app.post('/recive', (req, res) => {
   const twiml = new MessagingResponse();
-  const query = escape(req.Body);
-  const query2 = escape(req);
+  const query = escape(req.body);
+  const query2 = req;
   console.log(query);
   console.log(query2);
 /*   
