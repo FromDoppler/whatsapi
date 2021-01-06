@@ -1,6 +1,7 @@
 var express = require('express');
 require('dotenv').config();
 var app = express();
+const { escape } = require('querystring');
 
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -39,11 +40,12 @@ app.get('/sendMessage', function (req, res) {
 
 app.post('/recive', (req, res) => {
   const twiml = new MessagingResponse();
-/*   const query =  JSON.parse(JSON.stringify(req.Body));
+  const query = escape(req.Body);
   console.log(query);
+/*   
   console.log("otra opcioin seria estringifitear solo erl requ");
   console.log(JSON.parse(JSON.stringify(req))); */
-  const query = "*¡Hola!* 👋 Gracias por escribirnos.\n\n Cuéntanos cómo podemos ayudarte y *un miembro del equipo de Doppler te responderá pronto.*\n";
+  //const query = "*¡Hola!* 👋 Gracias por escribirnos.\n\n Cuéntanos cómo podemos ayudarte y *un miembro del equipo de Doppler te responderá pronto.*\n";
   twiml.message(`*su mensaje es:* \n\n${query}\n\n *muchas gracias.* \n\n\n🌈  *visítanos!:* https://www.fromdoppler.com`);
  
   res.writeHead(200, {'Content-Type': 'text/xml'});
