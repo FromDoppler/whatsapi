@@ -39,10 +39,15 @@ app.get('/sendMessage', function (req, res) {
 
 app.post('/recive', (req, res) => {
   const twiml = new MessagingResponse();
-  const query = escape(JSON.stringify(req.Body));
+  const query = JSON.stringify(req.body);
+  console.log("todo el req crudoooooooooooooooooooooooooooooooooooooooooooo");
+  console.log(req);
+  console.log("solo el req.body");
   console.log(req.body);
-  console.log("queryiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+  console.log("stringifiteadooooooooooooooooooooooooooooooooooooooooooooooo");
   console.log(query);
+  console.log("otra opcioin seria estringifitear solo erl requ");
+  console.log(JSON.stringify(req));
   twiml.message(`*su mensaje es:* \n\n${query}\n\n *muchas gracias.* \n\n\n🌈  *visítanos!:* https://www.fromdoppler.com`);
  
   res.writeHead(200, {'Content-Type': 'text/xml'});
