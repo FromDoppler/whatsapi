@@ -2,3 +2,9 @@ node_modules/
 .dockerignore
 *.log
 .env
+
+# Allow storing encrypted secrets only
+*.[sS]ecret.*
+**/[sS]ecret.*
+!*.[eE]ncrypted.[sS]ecret.*
+!**/[eE]ncrypted.[sS]ecret.*
