@@ -1,51 +1,56 @@
-version: '3'
-
+version: '3.7'
 services:
-  whatsapi:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: nodejs
-    env_file: .env
-    environment:
-      - TWILIO_ACCOUNT_SID=$TWILIO_ACCOUNT_SID
-      - TWILIO_AUTH_TOKEN=$TWILIO_AUTH_TOKEN
-    ports:
-      - "80:8080"
-    volumes:
-      - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
+  backend:
+    image: mcappato/whatsApi
     networks:
       - traefik-net
-    deploy:
+    deploy: 
       mode: replicated
       replicas: 3
-      labels:
+      labels: 
        - traefik.port=3000
        - traefik.docker.network=proxy
-       - traefik.frontend.rule=Host:node-app.cometari.com
+       - traefik.frontend.rule=Host:node-app.domain.com
       resources:
-        limits:
+        limits: 
          memory: 128M
-  nodejs:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: nodejs
-    container_name: nodejs
-    restart: unless-stopped
-    env_file: .env
-    environment:
-      - TWILIO_ACCOUNT_SID=$TWILIO_ACCOUNT_SID
-      - TWILIO_AUTH_TOKEN=$TWILIO_AUTH_TOKEN
-    ports:
-      - "80:8080"
-    volumes:
-      - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
+  traefik: 
+    image: traefik
+    ports: 
+     - "80:80"
+     - "443:443"
+     - "8080:8080"
     networks:
-      - app-network
-    command: ./wait-for.sh db:27017 -- /home/node/app/node_modules/.bin/nodemon app.js
+      - traefik-net
+    command: 
+      - --api
+      - --docker
+      - --docker.swarmmode
+      - --docker.watch
+      - --entrypoints=Name:http Address::80 Redirect.EntryPoint:https
+      - --entrypoints=Name:https Address::443 TLS
+      - --defaultentrypoints=http,https
+      - --acme 
+      - --acme.email=user@domain.com
+      - --acme.storage=/certificates/acme.json 
+      - --acme.entryPoint=https 
+      - --acme.httpChallenge.entryPoint=http
+      - --acme.onhostrule=true 
+      - --acme.acmelogging=true 
+      - --logLevel=INFO 
+      - --accessLog 
+    deploy: 
+     placement: 
+      constraints: [node.role == manager]
+     mode: replicated
+     replicas: 1
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "traefik-certificates:/certificates"
+               
+volumes: 
+  traefik-certificates:
 
-
-    
+networks:
+  traefik-net:
+    driver: overlay

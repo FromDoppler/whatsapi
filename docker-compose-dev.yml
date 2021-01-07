@@ -1,0 +1,18 @@
+version: '3'
+services:
+  whatsapi:
+    build:
+      context: .
+    container_name: whatsapi
+    restart: unless-stopped
+    environment:
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
+      DOPPLER_PHONE: ${DOPPLER_PHONE}
+    ports:
+      - "80:3000"
+    volumes:
+      - .:/home/node/app
+
+
+    
