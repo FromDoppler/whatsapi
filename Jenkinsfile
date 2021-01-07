@@ -6,33 +6,6 @@ pipeline {
                 sh 'docker build .' 
             }
         }
-        stage('Verify Format') {
-            steps {
-                sh 'docker build --target verify-format .'
-            }
-        }
-        stage('Verify .sh files') {
-            steps {
-                sh 'docker build --target verify-sh .'
-            }
-        }
-        stage('Restore') {
-            steps {
-                sh 'docker build --target restore .'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'docker build --target build .'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh '''docker build \
-                --target test \
-                .'''
-            }
-        }
         stage('Publish in dopplerdock') {
             environment {
                 DOCKER_CREDENTIALS_ID = "dockerhub_dopplerdock"
