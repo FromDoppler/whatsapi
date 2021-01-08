@@ -43,7 +43,7 @@ app.post('/recive', (req, res) => {
 
 
 app.get('*', function (req, res) {
-  console.log('Hello World!')
+  console.log('Hello World.!')
   res.send('Hello World!');
 });
 
