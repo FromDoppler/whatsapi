@@ -41,6 +41,17 @@ app.post('/recive', (req, res) => {
   res.end(twiml.toString());
 });
 
+app.get('/version', function (req, res) { 
+  console.log(`Version:v0.0.0`);//${process.env.VERSION}
+  res.send('Hello World!');
+});
+
+
+
+app.get('/version.txt', function (req, res) { 
+  console.log(`Version TXT:`)
+  res.send('Hello World!');
+});
 
 app.get('*', function (req, res) {
   console.log('Hello World!!')
