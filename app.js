@@ -54,7 +54,7 @@ app.get('/version.txt', function (req, res) {
 });
 
 app.get('*', function (req, res) {
-  console.log('Hello World!!')
+  console.log('Hello World!!.')
   res.send('Hello World!');
 });
 
